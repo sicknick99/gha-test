@@ -1,4 +1,4 @@
-name: Test Getting Git Branch
+name: Test Getting Git Branch 1
 
 on:
   push:
