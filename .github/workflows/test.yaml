@@ -18,14 +18,24 @@ jobs:
         env:
           GITHUB_BRANCH: ${{ github.base_ref }}
 
-      - name: Set env ME
+      - name: Set env ME to 50 if base branch is main
         shell: bash
-        run: |
-          if [[ $GITHUB_BRANCH == 'main' ]]; then
-            echo "ME=50" >> "$GITHUB_ENV"
-          else 
-            echo "ME=3" >> "$GITHUB_ENV"
-          fi
+        if: github.ref == 'refs/heads/main'
+        run: echo "ME=50" >> "$GITHUB_ENV"
+
+      - name: Set env ME to 3 if base branch is not main
+        shell: bash
+        if: github.ref != 'refs/heads/main'
+        run: echo "ME=3" >> "$GITHUB_ENV"
+
+      # - name: Set env ME
+      #   shell: bash
+      #   run: |
+      #     if [[ $GITHUB_BRANCH == 'main' ]]; then
+      #       echo "ME=50" >> "$GITHUB_ENV"
+      #     else
+      #       echo "ME=3" >> "$GITHUB_ENV"
+      #     fi
 
       - name: Create env file
         run: |
