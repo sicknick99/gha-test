@@ -19,7 +19,7 @@ jobs:
           GITHUB_BRANCH: ${{ github.ref }}
 
       - name: If main # 1. check compare branch is dev, 2. set MAX_EXAMPLES to 50
-        if: ${{ GITHUB_BRANCH }} == 'main'
+        if: ${ GITHUB_BRANCH } == 'main'
         shell: bash
         run: echo "ME=50"
         env:
