@@ -1,4 +1,3 @@
-Change in README to trigger GHA to `dev` branch
 # gha-test
 ## Goal 
 To reduce the time it takes to run the GitHub Actions tests on WIP branches.
