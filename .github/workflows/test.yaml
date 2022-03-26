@@ -2,9 +2,9 @@ name: Test Getting Git Branch 1
 
 on:
   push:
-    branches: [ main ]
+    branches: [ main, dev ]
   pull_request:
-    branches: [ main ]
+    branches: [ main, dev ]
 
 jobs:
   get_git_branch:
@@ -18,31 +18,22 @@ jobs:
         env:
           GITHUB_BRANCH: ${{ github.base_ref }}
 
-      - name: Set env ME to 50 if base branch is main
+      - name: Set env MAX_EXAMPLES to 50 if base branch is main
         shell: bash
         if: github.base_ref == 'main'
-        run: echo "ME=50" >> "$GITHUB_ENV"
+        run: echo "MAX_EXAMPLES=50" >> "$GITHUB_ENV"
 
-      - name: Set env ME to 3 if base branch is not main
+      - name: Set env MAX_EXAMPLES to 3 if base branch is not main
         shell: bash
         if: github.base_ref != 'main'
-        run: echo "ME=3" >> "$GITHUB_ENV"
-
-      # - name: Set env ME
-      #   shell: bash
-      #   run: |
-      #     if [[ $GITHUB_BRANCH == 'main' ]]; then
-      #       echo "ME=50" >> "$GITHUB_ENV"
-      #     else
-      #       echo "ME=3" >> "$GITHUB_ENV"
-      #     fi
+        run: echo "MAX_EXAMPLES=3" >> "$GITHUB_ENV"
 
       - name: Create env file
         run: |
           touch .env
           echo WEB3_INFURA_PROJECT_ID=${{ secrets.WEB3_INFURA_PROJECT_ID }} >> .env
           echo ETHERSCAN_TOKEN=${{ secrets.ETHERSCAN_TOKEN }} >> .env
-          echo MAX_EXAMPLES=${{env.ME}} >> .env
+          echo MAX_EXAMPLES=${{env.MAX_EXAMPLES}} >> .env
           cat .env
 
       - name: Cache Compiler Installations
