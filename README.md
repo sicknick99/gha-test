@@ -1,9 +1,9 @@
+Change in README to trigger GHA to `dev` branch
 # gha-test
 ## Goal 
 To reduce the time it takes to run the GitHub Actions tests on WIP branches.
 1. Make a `main` branch that GitHub Actions will run the brownie tests with the number of hypothesis iterations (`max_examples`) equal to 50 (the default).
 2. Make a `dev` branch that GitHub Actions will run the brownie tests with the number of hypothesis iterations  (`max_examples`) equal to 3.
-
 
 Because `brownie` does not allow for config specification, but instead requires the configuration file to be in the root directory and named `brownie-config.yaml`, we cannot simply create two separate config files (one for `main` and one for `dev`). 
 `brownie` does however allow you to pass in environment variables into the config file.
