@@ -1,6 +1,15 @@
 #!/usr/bin/python3
 
 import pytest
+import time
+from brownie.test import given, strategy
+
+@given(x=strategy('int', min_value='0', max_value='50'))
+def test_sick_nick(x):
+    y = x
+    print('SICK NICK y', y)
+    time.sleep(1)
+    assert 1 == 1
 
 
 @pytest.mark.parametrize("idx", range(5))
