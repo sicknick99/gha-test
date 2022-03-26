@@ -18,6 +18,10 @@ Now, PRs will be opened and merged directly to `dev`, NOT `main`.
 Once the PR to `dev` is finalized and all GitHub Actions have passed, THEN a new PR is opened on the `main` branch from the `dev` branch.
 The `main` branch will ONLY accept PRs (and therefore merges) from the `dev` branch (this is enforced by logic included in the GitHub Action file).
 
+How to do git comments in merge commits:
+1. When merging from a working branch to `dev`, leave all git comments in the commit.
+1. When merging from `dev` to `main`, only include one single line of the git comment that refers to the `dev` branch.
+
 ### GitHub Actions Updates
 The following changes are included in the GitHub Actions.
 The first change listed below enforces the new developer flow.
@@ -40,4 +44,5 @@ Go to Settings -> Branches -> Add Rule, then for both `main` and `dev` select:
 - Select: `Require a pull request before merging`
 - Select: `Require status checks to pass before merging`
   - Select: `Require branches to be up to date before merging`
-  - In the search bar, type `get_git_branch` and add it so it is present under `Status checks that are required`.
+  - In the search bar, type the name of the job of the GitHub Action that should stop a merge if it fails (`tests` for our Action) and add it so it is present under `Status checks that are required`.
+
