@@ -10,6 +10,65 @@ jobs:
   get_git_branch:
     runs-on: ubuntu-latest
     steps:
-      - run: echo "${GITHUB_BRANCH##*/}"
+      - uses: actions/checkout@v2
+
+      - name: Get source branch name
+        shell: bash
+        run: echo "${GITHUB_BRANCH##*/}"
         env:
-          GITHUB_BRANCH: ${{ github.ref }}
+          GITHUB_BRANCH: ${{ github.base_ref }}
+
+      - name: Set env ME to 50 if base branch is main
+        shell: bash
+        if: github.base_ref == 'main'
+        run: echo "ME=50" >> "$GITHUB_ENV"
+
+      - name: Set env ME to 3 if base branch is not main
+        shell: bash
+        if: github.base_ref != 'main'
+        run: echo "ME=3" >> "$GITHUB_ENV"
+
+      # - name: Set env ME
+      #   shell: bash
+      #   run: |
+      #     if [[ $GITHUB_BRANCH == 'main' ]]; then
+      #       echo "ME=50" >> "$GITHUB_ENV"
+      #     else
+      #       echo "ME=3" >> "$GITHUB_ENV"
+      #     fi
+
+      - name: Create env file
+        run: |
+          touch .env
+          echo WEB3_INFURA_PROJECT_ID=${{ secrets.WEB3_INFURA_PROJECT_ID }} >> .env
+          echo ETHERSCAN_TOKEN=${{ secrets.ETHERSCAN_TOKEN }} >> .env
+          echo MAX_EXAMPLES=${{env.ME}} >> .env
+          cat .env
+
+      - name: Cache Compiler Installations
+        uses: actions/cache@v2
+        with:
+          path: |
+            ~/.solcx
+            ~/.vvm
+          key: compiler-cache
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v1
+
+      - name: Install Ganache
+        run: npm install -g ganache-cli@6.12.1
+
+      - name: Setup Python
+        uses: actions/setup-python@v2
+        with:
+          python-version: ${{ matrix.python-version }}
+
+      - name: Install Requirements
+        run: pip install -r requirements.txt
+
+      - name: Compile Code
+        run: brownie compile --size
+
+      - name: Run Tests
+        run: brownie test -vv -s --gas
