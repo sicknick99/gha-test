@@ -22,11 +22,11 @@ jobs:
         shell: bash
         run: echo "${GITHUB_SOURCE##*/}"
         env:
-          GITHUB_SOURCE: ${{ github.ref }}
+          GITHUB_SOURCE: ${{ github.head_ref }}
 
       - name: If base branch is main and source is NOT dev, fail action
         shell: bash
-        if: ${{ github.base_ref == 'main' && github.ref != 'dev' }}
+        if: ${{ github.base_ref == 'main' && github.head_ref != 'dev' }}
         run: exit 1
 
       - name: Set env MAX_EXAMPLES to 50 if base branch is main and source is dev
