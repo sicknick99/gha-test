@@ -33,3 +33,11 @@ The second and third changes listed below are directly related to reducing the t
    ```
    export MAX_EXAMPLES=<number of desired hypothesis iterations>
    ```
+
+### Notes
+Ensure that branch protection is turned on for both `main` and `dev`.
+Go to Settings -> Branches -> Add Rule, then for both `main` and `dev` select:
+- Select: `Require a pull request before merging`
+- Select: `Require status checks to pass before merging`
+  - Select: `Require branches to be up to date before merging`
+  - In the search bar, type `get_git_branch` and add it so it is present under `Status checks that are required`.
