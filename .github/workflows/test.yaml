@@ -32,7 +32,7 @@ jobs:
           touch .env
           echo WEB3_INFURA_PROJECT_ID=${{ secrets.WEB3_INFURA_PROJECT_ID }} >> .env
           echo ETHERSCAN_TOKEN=${{ secrets.ETHERSCAN_TOKEN }} >> .env
-          echo MAX_EXAMPLES=env.ME >> .env
+          echo MAX_EXAMPLES=${{env.ME}} >> .env
           cat .env
 
       - name: Cache Compiler Installations
