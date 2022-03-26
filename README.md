@@ -18,6 +18,20 @@ Now, PRs will be opened and merged directly to `dev`, NOT `main`.
 Once the PR to `dev` is finalized and all GitHub Actions have passed, THEN a new PR is opened on the `main` branch from the `dev` branch.
 The `main` branch will ONLY accept PRs (and therefore merges) from the `dev` branch (this is enforced by logic included in the GitHub Action file).
 
+To ensure `main` and `dev` don't have conflicts, do the following before opening a PR from `dev` on `main`:
+```
+% git checkout <working-branch>
+% git merge dev
+% git push <remote> <working-branch>
+```
+
+Similarly, to ensure `main` and `dev` don't have conflicts, do the following before opening a PR from `dev` on `main`:
+```
+% git checkout dev
+% git merge main
+% git push <remote> dev
+```
+
 How to do git comments in merge commits:
 1. When merging from a working branch to `dev`, leave all git comments in the commit.
 1. When merging from `dev` to `main`, only include one single line of the git comment that refers to the `dev` branch.
