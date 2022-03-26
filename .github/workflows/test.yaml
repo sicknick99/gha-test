@@ -1,4 +1,4 @@
-name: Test Getting Git Branch 1
+name: Python Tests
 
 on:
   push:
@@ -30,7 +30,7 @@ jobs:
         if: ${{ github.base_ref == 'main' && github.head_ref == 'dev' }}
         run: echo "MAX_EXAMPLES=50" >> "$GITHUB_ENV"
 
-      - name: Set env MAX_EXAMPLES to 3 if base branch is not main
+      - name: Set env MAX_EXAMPLES to 3 if base branch is NOT main
         shell: bash
         if: github.base_ref != 'main'
         run: echo "MAX_EXAMPLES=3" >> "$GITHUB_ENV"
