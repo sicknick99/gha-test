@@ -20,12 +20,12 @@ jobs:
 
       - name: Set env ME to 50 if base branch is main
         shell: bash
-        if: github.ref == 'main'
+        if: github.base_ref == 'main'
         run: echo "ME=50" >> "$GITHUB_ENV"
 
       - name: Set env ME to 3 if base branch is not main
         shell: bash
-        if: github.ref != 'main'
+        if: github.base_ref != 'main'
         run: echo "ME=3" >> "$GITHUB_ENV"
 
       # - name: Set env ME
