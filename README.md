@@ -44,5 +44,5 @@ Go to Settings -> Branches -> Add Rule, then for both `main` and `dev` select:
 - Select: `Require a pull request before merging`
 - Select: `Require status checks to pass before merging`
   - Select: `Require branches to be up to date before merging`
-  - In the search bar, type the name of the job of the GitHub Action that should stop a merge if it fails (`test` for our Action) and add it so it is present under `Status checks that are required`.
+  - In the search bar, type the name of the job of the GitHub Action that should stop a merge if it fails (`tests` for our Action) and add it so it is present under `Status checks that are required`.
 
