@@ -14,7 +14,7 @@ jobs:
 
       - name: Get source branch name
         shell: bash
-        run: echo "Source branch: ${GITHUB_BRANCH##*/}"
+        run: echo "${GITHUB_BRANCH##*/}"
         env:
           GITHUB_BRANCH: ${{ github.ref }}
 
