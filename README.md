@@ -9,7 +9,7 @@ Therefore, using environment variables to set the number of iterations will be u
 
 ## Goal 
 Reduce the time it takes to run the GitHub Actions tests on WIP branches.
-In doing this, introduces a ne developer flow that is enforced by the GitHub Actions.
+In doing this, introduces a new developer flow that is enforced by the GitHub Actions.
 
 ### Developer Flow
 Previously, PRs were opened and merged directly to the `main` branch.
