@@ -1,3 +1,26 @@
+# gha-test
+## Goal 
+To reduce the time it takes to run the GitHub Actions tests on WIP branches.
+1. Make a `main` branch that GitHub Actions will run the brownie tests with the number of hypothesis iterations (`max_examples`) equal to 50 (the default).
+2. Make a `dev` branch that GitHub Actions will run the brownie tests with the number of hypothesis iterations  (`max_examples`) equal to 3.
+
+
+Because `brownie` does not allow for config specification, but instead requires the configuration file to be in the root directory and named `brownie-config.yaml`, we cannot simply create two separate config files (one for `main` and one for `dev`). 
+`brownie` does however allow you to pass in environment variables into the config file.
+
+We must make it so the config file works both locally and can be executed by GitHub Actions.
+
+Therefore, to achieve the goal, we do the following:
+1. In `brownie-config.yaml` we define `max_examples` and the `MAX_EXAMPLES` environment variable.
+1. For local use, we include the line `export MAX_EXAMPLES=50` for branches being pushed to `main`, and `export MAX_EXAMPLES=3` (or which ever number of iterations desired) for branches in flux that will be pushed to `dev`. (SN TODO: Right now have it set to `export MAX_EXAMPLES=${ME}`).
+  For use in GitHub actions, we first get the base branch (expected to be either `main` or `dev`) then have several checks:
+    1. If the base branch is `main`, then we check that the source/compare branch is `dev`. If it is not, then fail and prevent merge. (SN TODO: Check this is the desired action with the team). Then `ME` is then set to `50` (SN TODO: `ME` vs just setting `MAX_EXAMPLES`, will that work?)
+    1. If the base branch is `dev`, we allow any other branch to be merged in and `ME` is set to `3`.
+1. Execute remaining test Actions.
+
+1. Any merges into `main` MUST always be from `dev` (SN TODO: put hard check in GHA for this)
+
+
 # token-mix
 
 A bare-bones implementation of the Ethereum [ERC-20 standard](https://eips.ethereum.org/EIPS/eip-20), written in [Solidity](https://github.com/ethereum/solidity).

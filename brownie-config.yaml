@@ -3,3 +3,9 @@
 reports:
   exclude_contracts:
     - SafeMath
+
+dotenv: .env
+
+hypothesis:
+    deadline: null
+    max_examples: ${MAX_EXAMPLES}
