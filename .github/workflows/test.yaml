@@ -16,12 +16,12 @@ jobs:
         shell: bash
         run: echo "${GITHUB_BRANCH##*/}"
         env:
-          BASE_BRANCH: ${{ github.ref }}
+          GITHUB_BRANCH: ${{ github.ref }}
 
       - name: Set env ME
         shell: bash
         run: |
-          if [[ $BASE_BRANCH == 'main' ]]; then
+          if [[ $GITHUB_BRANCH == 'main' ]]; then
             echo "ME=50" >> "$GITHUB_ENV"
           else 
             echo "ME=3" >> "$GITHUB_ENV"
