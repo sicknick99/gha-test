@@ -20,6 +20,13 @@ The `main` branch will ONLY accept PRs (and therefore merges) from the `dev` bra
 
 To ensure `main` and `dev` don't have conflicts, do the following before opening a PR from `dev` on `main`:
 ```
+% git checkout <working-branch>
+% git merge dev
+% git push <remote> <working-branch>
+```
+
+Similarly, to ensure `main` and `dev` don't have conflicts, do the following before opening a PR from `dev` on `main`:
+```
 % git checkout dev
 % git merge main
 % git push <remote> dev
