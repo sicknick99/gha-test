@@ -16,7 +16,7 @@ jobs:
         shell: bash
         run: echo "${GITHUB_BRANCH##*/}"
         env:
-          GITHUB_BRANCH: ${{ github.ref }}
+          GITHUB_BRANCH: ${{ github.base_ref }}
 
       - name: Set env ME
         shell: bash
