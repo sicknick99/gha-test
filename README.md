@@ -1,7 +1,5 @@
 # gha-test
 
-;)
-
 ## Problem
 Running a sufficient number of hypothesis test iterations (denoted by `brownie` as `max_examples`) to ensure code correctness takes too long when developing on working branches.
 
