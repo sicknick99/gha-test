@@ -1,13 +1,14 @@
 # gha-test
+
 ## Problem
 Running a sufficient number of hypothesis test iterations (denoted by `brownie` as `max_examples`) to ensure code correctness takes too long when developing on working branches.
 
 The reasonable fix would be to have two separate `brownie-config.yaml` files, one for production (`main`) and runs the default number of iterations (50), and one for working branches that runs a very small number of iterations (3 is chosen).
-Because `brownie` does not allow the user to specify the configuration file, but instead requires the configuration file to be in the root directory and to be named `brownie-config.yaml`, we unfortunately cannot simply create two separate configuration files. 
+Because `brownie` does not allow the user to specify the configuration file, but instead requires the configuration file to be in the root directory and to be named `brownie-config.yaml`, we unfortunately cannot simply create two separate configuration files.
 `brownie` does however allow you to pass in environment variables into the configuration file.
 Therefore, using environment variables to set the number of iterations will be used as a work around.
 
-## Goal 
+## Goal
 Reduce the time it takes to run the GitHub Actions tests on WIP branches.
 In doing this, introduces a new developer flow that is enforced by the GitHub Actions.
 
